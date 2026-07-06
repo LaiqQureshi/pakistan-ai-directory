@@ -1,0 +1,390 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>The Pakistan AI Directory — Curated by LaiqVerse</title>
+<meta name="description" content="A curated directory of AI agencies, studios, and case studies in Pakistan — built for agencies pitching AI capability to clients.">
+<style>
+  :root{
+    --black:#0A0A0A;
+    --charcoal:#141414;
+    --panel:#181818;
+    --line: rgba(255,255,255,0.08);
+    --gold:#C9A84C;
+    --orange:#E84A00;
+    --white:#F5F3EE;
+    --dim: rgba(245,243,238,0.55);
+  }
+  *{box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{
+    margin:0;
+    background:var(--black);
+    color:var(--white);
+    font-family:'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+    -webkit-font-smoothing:antialiased;
+  }
+
+  /* ===== HEADER ===== */
+  header{
+    padding:64px 6vw 40px;
+    border-bottom:1px solid var(--line);
+    position:relative;
+    overflow:hidden;
+  }
+  header::before{
+    content:"";
+    position:absolute; top:-40%; right:-10%;
+    width:600px; height:600px;
+    background:radial-gradient(circle, rgba(201,168,76,0.10) 0%, transparent 70%);
+    pointer-events:none;
+  }
+  .eyebrow{
+    display:flex; align-items:center; gap:10px;
+    font-size:11px; letter-spacing:.18em; text-transform:uppercase;
+    color:var(--gold); font-weight:700; margin-bottom:22px;
+  }
+  .eyebrow .dot{width:6px;height:6px;border-radius:50%;background:var(--orange);}
+  h1{
+    font-size:clamp(34px, 5.2vw, 68px);
+    line-height:1.04;
+    margin:0 0 20px;
+    font-weight:700;
+    letter-spacing:-0.02em;
+    max-width:900px;
+  }
+  h1 span{color:var(--gold);}
+  .sub{
+    max-width:620px;
+    color:var(--dim);
+    font-size:16px;
+    line-height:1.6;
+    margin-bottom:8px;
+  }
+  .credit{
+    font-size:12px; color:var(--dim); margin-top:28px;
+    letter-spacing:.02em;
+  }
+  .credit b{color:var(--white); font-weight:600;}
+
+  /* ===== CONTROLS ===== */
+  .controls{
+    padding:28px 6vw;
+    display:flex; flex-wrap:wrap; gap:14px;
+    align-items:center;
+    border-bottom:1px solid var(--line);
+    position:sticky; top:0;
+    background:rgba(10,10,10,0.92);
+    backdrop-filter:blur(10px);
+    z-index:10;
+  }
+  #search{
+    flex:1 1 260px;
+    background:var(--panel);
+    border:1px solid var(--line);
+    color:var(--white);
+    padding:12px 16px;
+    border-radius:6px;
+    font-size:14px;
+    font-family:inherit;
+  }
+  #search:focus{outline:none; border-color:var(--gold);}
+  #search::placeholder{color:var(--dim);}
+
+  .chip{
+    background:transparent;
+    border:1px solid var(--line);
+    color:var(--dim);
+    padding:9px 16px;
+    border-radius:999px;
+    font-size:12.5px;
+    font-family:inherit;
+    cursor:pointer;
+    letter-spacing:.02em;
+    transition:all .15s ease;
+    white-space:nowrap;
+  }
+  .chip:hover{border-color:var(--gold); color:var(--white);}
+  .chip.active{background:var(--gold); border-color:var(--gold); color:var(--black); font-weight:600;}
+
+  .count{font-size:12px; color:var(--dim); margin-left:auto; white-space:nowrap;}
+
+  /* ===== GRID ===== */
+  main{padding:44px 6vw 20px;}
+  .grid{
+    display:grid;
+    grid-template-columns:repeat(auto-fill, minmax(300px, 1fr));
+    gap:18px;
+  }
+  .card{
+    background:var(--panel);
+    border:1px solid var(--line);
+    border-radius:10px;
+    padding:24px;
+    cursor:pointer;
+    transition:transform .18s ease, border-color .18s ease, background .18s ease;
+    display:flex; flex-direction:column; gap:12px;
+  }
+  .card:hover{
+    border-color:var(--gold);
+    transform:translateY(-3px);
+    background:#1c1c1c;
+  }
+  .card-top{display:flex; justify-content:space-between; align-items:flex-start; gap:10px;}
+  .card h3{margin:0; font-size:19px; font-weight:700; letter-spacing:-0.01em;}
+  .loc{font-size:11.5px; color:var(--gold); text-transform:uppercase; letter-spacing:.08em; font-weight:700; white-space:nowrap;}
+  .card p{margin:0; font-size:13.5px; line-height:1.55; color:var(--dim);}
+  .tags{display:flex; flex-wrap:wrap; gap:6px; margin-top:auto; padding-top:6px;}
+  .tag{
+    font-size:10.5px; padding:4px 9px; border-radius:4px;
+    background:rgba(255,255,255,0.05); color:var(--dim);
+    border:1px solid var(--line);
+  }
+  .tag.svc{color:var(--orange); border-color:rgba(232,74,0,0.3);}
+
+  .empty{
+    text-align:center; padding:80px 20px; color:var(--dim); font-size:14px;
+  }
+
+  /* ===== CASE STUDIES ===== */
+  .cs-section{padding:80px 6vw; border-top:1px solid var(--line); margin-top:40px;}
+  .section-head{max-width:640px; margin-bottom:40px;}
+  .section-head .eyebrow{margin-bottom:14px;}
+  .section-head h2{font-size:clamp(26px,3.4vw,40px); margin:0 0 12px; font-weight:700; letter-spacing:-0.01em;}
+  .section-head p{color:var(--dim); font-size:15px; line-height:1.6; margin:0;}
+
+  .cs-grid{display:grid; grid-template-columns:repeat(auto-fit, minmax(280px,1fr)); gap:20px;}
+  .cs-card{
+    border:1px solid var(--line); border-radius:10px; padding:26px;
+    background:linear-gradient(180deg, rgba(201,168,76,0.04), transparent 60%);
+  }
+  .cs-brand{font-size:11px; letter-spacing:.14em; text-transform:uppercase; color:var(--orange); font-weight:700; margin-bottom:10px;}
+  .cs-card h4{margin:0 0 10px; font-size:19px; font-weight:700;}
+  .cs-card p{margin:0; font-size:13.5px; color:var(--dim); line-height:1.6;}
+
+  /* ===== MODAL ===== */
+  .overlay{
+    display:none; position:fixed; inset:0; background:rgba(0,0,0,0.7);
+    z-index:100; align-items:center; justify-content:center; padding:20px;
+  }
+  .overlay.open{display:flex;}
+  .modal{
+    background:var(--charcoal); border:1px solid var(--gold);
+    border-radius:12px; max-width:520px; width:100%;
+    padding:36px; position:relative;
+    box-shadow:0 20px 60px rgba(0,0,0,0.6);
+  }
+  .modal .close{
+    position:absolute; top:18px; right:20px; background:none; border:none;
+    color:var(--dim); font-size:22px; cursor:pointer; line-height:1;
+  }
+  .modal .close:hover{color:var(--white);}
+  .modal h3{font-size:24px; margin:0 0 4px; font-weight:700;}
+  .modal .loc{font-size:12px; margin-bottom:18px; display:inline-block;}
+  .modal p{color:var(--dim); font-size:14px; line-height:1.65; margin:0 0 18px;}
+  .modal .tags{margin-bottom:0;}
+
+  footer{
+    padding:40px 6vw 60px; border-top:1px solid var(--line);
+    color:var(--dim); font-size:12px; line-height:1.7;
+  }
+  footer a{color:var(--gold); text-decoration:none;}
+  footer a:hover{text-decoration:underline;}
+
+  @media (max-width:640px){
+    header{padding:48px 5vw 32px;}
+    .controls{padding:20px 5vw; position:static;}
+    main{padding:32px 5vw;}
+    .cs-section{padding:56px 5vw;}
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="eyebrow"><span class="dot"></span>LaiqVerse · I direct machines to imagine</div>
+  <h1>The Pakistan <span>AI Directory</span></h1>
+  <p class="sub">A working map of the studios, agencies, and consultancies building AI capability into Pakistani business — compiled for agencies and marketers who need to know who's actually doing the work before they pitch it.</p>
+  <div class="credit">Curated by <b>Laiq Ahmed Qureshi</b> — Creative Director &amp; Imagineer, LaiqVerse</div>
+</header>
+
+<div class="controls">
+  <input type="text" id="search" placeholder="Search by name, city, or service...">
+  <button class="chip active" data-filter="all">All</button>
+  <button class="chip" data-filter="Chatbots & Automation">Chatbots &amp; Automation</button>
+  <button class="chip" data-filter="Data & Analytics">Data &amp; Analytics</button>
+  <button class="chip" data-filter="Product & GenAI">Product &amp; GenAI</button>
+  <button class="chip" data-filter="Full-Stack Digital">Full-Stack Digital</button>
+  <span class="count" id="count"></span>
+</div>
+
+<main>
+  <div class="grid" id="grid"></div>
+  <div class="empty" id="empty" style="display:none;">No matches. Try a different search term.</div>
+</main>
+
+<section class="cs-section">
+  <div class="section-head">
+    <div class="eyebrow"><span class="dot"></span>Case Studies</div>
+    <h2>Where the work has actually run</h2>
+    <p>Directories tell you who exists. This tells you who's already shipped an AI campaign in front of a Pakistani audience — worth knowing before you promise a client something untested.</p>
+  </div>
+  <div class="cs-grid" id="csGrid"></div>
+</section>
+
+<footer>
+  Compiled from public reporting on Pakistan's AI and advertising sector, current as of mid-2026. Company details are self-reported by each firm; verify current capability, pricing, and availability directly before commissioning work. This directory is an independent editorial resource and is not affiliated with any listed company.<br><br>
+  A <a href="https://laiqverse11.wordpress.com" target="_blank">LaiqVerse</a> project.
+</footer>
+
+<div class="overlay" id="overlay">
+  <div class="modal" id="modalBody"></div>
+</div>
+
+<script>
+const companies = [
+  {name:"Tezeract", city:"Pakistan", cat:"Product & GenAI",
+    desc:"An AI-first consultancy that leads with a strategy audit before building anything — will tell a client honestly if AI isn't the right fix. Delivers production AI systems with documented ROI, and has shipped 180+ projects across 25+ countries.",
+    tags:["AI Strategy","Custom AI Systems","180+ Projects","25+ Countries"]},
+  {name:"Data Pilot", city:"Pakistan", cat:"Data & Analytics",
+    desc:"Built an AI-powered analytics platform for Lulusar, a major Pakistani fashion brand, turning marketing and sales data into optimized ad spend and measurable performance gains. Focused on consumer brands and e-commerce.",
+    tags:["Marketing Analytics","Predictive Modeling","Fashion & Retail","Client: Lulusar"]},
+  {name:"Addo AI", city:"Pakistan", cat:"Data & Analytics",
+    desc:"Known for handling complex data at scale for large organizations, including government clients — strong in data engineering and AI consulting for enterprise-level strategy.",
+    tags:["Data Engineering","AI Consulting","Enterprise & Gov"]},
+  {name:"Binary Marvels", city:"Pakistan", cat:"Chatbots & Automation",
+    desc:"Builds AI chatbots, voice agents, and automation systems with a stated focus on user experience over buzzwords — practical tools for day-to-day business operations.",
+    tags:["AI Chatbots","Voice Agents","Automation"]},
+  {name:"FiveRivers Technologies", city:"Pakistan", cat:"Product & GenAI",
+    desc:"A well-established player spanning Web3, data science, and mixed reality, applying AI across healthcare, retail, smart cities, and transportation.",
+    tags:["Mixed Reality","Healthcare","Smart Cities"]},
+  {name:"CodeNinja", city:"Pakistan", cat:"Product & GenAI",
+    desc:"Software development firm with strong reviews for AI integration and custom SaaS work, especially in energy, financial services, banking, and education.",
+    tags:["AI Integration","Custom SaaS","Banking & Finance"]},
+  {name:"Growth Loops Technology", city:"Pakistan", cat:"Product & GenAI",
+    desc:"Mobile app development and AI systems studio with a track record across insurance, financial services, healthcare, telecom, and advertising & marketing clients.",
+    tags:["Mobile + AI","UI/UX","Insurance & Telecom"]},
+  {name:"Toolshed", city:"Pakistan", cat:"Data & Analytics",
+    desc:"Custom software and data engineering shop offering AI agent creation alongside dashboard development — one client saw query run time cut from 12 seconds to 2.",
+    tags:["AI Agents","Dashboards","Data Engineering"]},
+  {name:"LetTech (Pvt) Ltd", city:"Peshawar", cat:"Product & GenAI",
+    desc:"Builds SaaS products designed specifically for the Pakistani market — priced in PKR, built for local regulation and language — across healthcare, education, and SMEs.",
+    tags:["Domestic-First SaaS","Healthcare","Education"]},
+  {name:"Arbisoft", city:"Lahore", cat:"Product & GenAI",
+    desc:"Established software house with AI/ML services and product partnerships, one of the more mature engineering teams in Pakistan's product ecosystem.",
+    tags:["AI/ML Services","Product Partnerships"]},
+  {name:"10Pearls", city:"Islamabad", cat:"Product & GenAI",
+    desc:"Generative AI implementation and product development studio, working with enterprise clients on applied GenAI features.",
+    tags:["Generative AI","Product Development"]},
+  {name:"Folio3", city:"Karachi", cat:"Product & GenAI",
+    desc:"Enterprise solutions house with a notable focus on AI AgriTech, applying machine learning to agricultural and supply chain problems.",
+    tags:["AgriTech","Enterprise Solutions"]},
+  {name:"Evolviq Digital", city:"Karachi", cat:"Chatbots & Automation",
+    desc:"AI automation studio offering custom chatbots, AI calling agents, intelligent document processing, and AI-powered CRM integration for businesses looking to automate operations.",
+    tags:["AI Calling Agents","IDP","AI CRM"]},
+  {name:"CyMax Technologies", city:"Islamabad", cat:"Full-Stack Digital",
+    desc:"IT and ICT service provider positioning itself around secure, scalable technology solutions for businesses across sectors.",
+    tags:["IT & ICT","Secure Systems"]},
+  {name:"DigiTrends", city:"Pakistan", cat:"Full-Stack Digital",
+    desc:"Full-stack digital agency that has worked with over 600 brands across pharma, fintech, e-commerce, and retail — broad reach across regulated and consumer sectors.",
+    tags:["Full-Stack Digital","600+ Brands","Pharma & Fintech"]},
+  {name:"Lewal Technologies", city:"Pakistan", cat:"Full-Stack Digital",
+    desc:"Runs its own portfolio of consumer ventures — including an e-commerce store and a fashion brand — alongside client marketing and education work, giving it hands-on brand-building experience.",
+    tags:["Marketing","E-commerce","Fashion Brand: Pairzo"]},
+  {name:"TekInvent", city:"Pakistan", cat:"Product & GenAI",
+    desc:"Digital transformation firm delivering custom software, mobile apps, and AI-powered solutions for startups and enterprises.",
+    tags:["Digital Transformation","Custom Software"]},
+  {name:"Sam's Solution", city:"Pakistan", cat:"Full-Stack Digital",
+    desc:"Software and IT consulting firm focused on streamlining operations and digital transformation for growing businesses.",
+    tags:["IT Consulting","Digital Transformation"]},
+];
+
+const caseStudies = [
+  {brand:"Zong", title:"Contextual, not generic", desc:"An early AI-driven campaign that stood apart from spectacle-first AI ads by pairing a clear value proposition with contextually relevant, culturally grounded storytelling."},
+  {brand:"ZERO — Jewel Smartwatch", title:'"Only for Her"', desc:"Marketed as Pakistan's first story-driven AI ad. Rather than leaning on AI as a visual gimmick, it used the technology as a storytelling partner to honor women who give, care, and inspire — proof that AI guided by strong creative intent can carry real emotional weight."},
+  {brand:"Lulusar × Data Pilot", title:"Data as the AI story", desc:"A major Pakistani fashion brand turned to AI-powered analytics rather than AI-generated visuals — unlocking marketing and sales data to optimize ad spend and lift business performance."},
+];
+
+const grid = document.getElementById('grid');
+const csGrid = document.getElementById('csGrid');
+const empty = document.getElementById('empty');
+const countEl = document.getElementById('count');
+const searchInput = document.getElementById('search');
+const chips = document.querySelectorAll('.chip');
+let activeFilter = 'all';
+
+function render(){
+  const q = searchInput.value.trim().toLowerCase();
+  const filtered = companies.filter(c=>{
+    const matchesFilter = activeFilter === 'all' || c.cat === activeFilter;
+    const haystack = (c.name + ' ' + c.city + ' ' + c.cat + ' ' + c.tags.join(' ')).toLowerCase();
+    const matchesSearch = !q || haystack.includes(q);
+    return matchesFilter && matchesSearch;
+  });
+
+  grid.innerHTML = filtered.map((c,i)=>`
+    <div class="card" data-idx="${companies.indexOf(c)}">
+      <div class="card-top">
+        <h3>${c.name}</h3>
+        <span class="loc">${c.city}</span>
+      </div>
+      <p>${c.desc}</p>
+      <div class="tags">
+        <span class="tag svc">${c.cat}</span>
+        ${c.tags.slice(0,2).map(t=>`<span class="tag">${t}</span>`).join('')}
+      </div>
+    </div>
+  `).join('');
+
+  empty.style.display = filtered.length ? 'none' : 'block';
+  countEl.textContent = filtered.length + (filtered.length===1 ? ' listing' : ' listings');
+
+  grid.querySelectorAll('.card').forEach(card=>{
+    card.addEventListener('click', ()=> openModal(companies[card.dataset.idx]));
+  });
+}
+
+function openModal(c){
+  document.getElementById('modalBody').innerHTML = `
+    <button class="close" id="closeBtn">&times;</button>
+    <h3>${c.name}</h3>
+    <span class="loc" style="color:#C9A84C;">${c.city}</span>
+    <p>${c.desc}</p>
+    <div class="tags">
+      <span class="tag svc">${c.cat}</span>
+      ${c.tags.map(t=>`<span class="tag">${t}</span>`).join('')}
+    </div>
+  `;
+  document.getElementById('overlay').classList.add('open');
+  document.getElementById('closeBtn').addEventListener('click', closeModal);
+}
+function closeModal(){ document.getElementById('overlay').classList.remove('open'); }
+document.getElementById('overlay').addEventListener('click', e=>{
+  if(e.target.id === 'overlay') closeModal();
+});
+document.addEventListener('keydown', e=>{ if(e.key==='Escape') closeModal(); });
+
+chips.forEach(chip=>{
+  chip.addEventListener('click', ()=>{
+    chips.forEach(c=>c.classList.remove('active'));
+    chip.classList.add('active');
+    activeFilter = chip.dataset.filter;
+    render();
+  });
+});
+searchInput.addEventListener('input', render);
+
+csGrid.innerHTML = caseStudies.map(cs=>`
+  <div class="cs-card">
+    <div class="cs-brand">${cs.brand}</div>
+    <h4>${cs.title}</h4>
+    <p>${cs.desc}</p>
+  </div>
+`).join('');
+
+render();
+</script>
+
+</body>
+</html>
