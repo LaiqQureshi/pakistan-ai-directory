@@ -11,8 +11,9 @@
     --charcoal:#141414;
     --panel:#181818;
     --line: rgba(255,255,255,0.08);
-    --gold:#C9A84C;
+    --gold:#E84A00;
     --orange:#E84A00;
+    --orange-dim: rgba(232,74,0,0.65);
     --white:#F5F3EE;
     --dim: rgba(245,243,238,0.55);
   }
@@ -224,6 +225,32 @@
   <div class="empty" id="empty" style="display:none;">No matches. Try a different search term.</div>
 </main>
 
+<section class="cs-section" style="border-top:1px solid var(--line);">
+  <div class="section-head" style="display:flex; flex-wrap:wrap; gap:40px; align-items:flex-start; max-width:100%;">
+    <div style="flex:1 1 320px; max-width:640px;">
+      <div class="eyebrow"><span class="dot"></span>About the Curator</div>
+      <h2 style="font-size:clamp(24px,3vw,34px); margin:0 0 14px; font-weight:700;">Laiq Ahmed Qureshi</h2>
+      <p style="color:var(--dim); font-size:14.5px; line-height:1.7; margin:0 0 14px;">
+        A Creative Director and Digital Strategist based in Karachi, with over 20 years in advertising and branding. An NCA Lahore alumnus who now works at the intersection of creative direction, AI visual systems, and editorial content — the kind of vantage point this directory is built from.
+      </p>
+      <p style="color:var(--dim); font-size:14.5px; line-height:1.7; margin:0;">
+        Through LaiqVerse, he writes on AI, creative identity, and where advertising is headed next — dark luxury aesthetics applied to ideas as much as visuals. <span style="color:var(--gold); font-weight:600;">"I direct machines to imagine."</span>
+      </p>
+    </div>
+    <div style="flex:0 1 260px; border-left:1px solid var(--line); padding-left:32px;">
+      <div style="font-size:11px; letter-spacing:.12em; text-transform:uppercase; color:var(--dim); font-weight:700; margin-bottom:16px;">Find LaiqVerse</div>
+      <div style="display:flex; flex-direction:column; gap:10px; font-size:13.5px;">
+        <a href="https://laiqverse11.wordpress.com" target="_blank" style="color:var(--white); text-decoration:none;">→ WordPress Blog</a>
+        <a href="https://x.com/LaiqVerse" target="_blank" style="color:var(--white); text-decoration:none;">→ X — @LaiqVerse</a>
+        <a href="https://www.instagram.com/laiqverse/?hl=en" target="_blank" style="color:var(--white); text-decoration:none;">→ Instagram — @laiqverse</a>
+        <a href="https://www.facebook.com/LaiqVerse11" target="_blank" style="color:var(--white); text-decoration:none;">→ Facebook</a>
+        <a href="https://www.linkedin.com/in/laiqqureshi/" target="_blank" style="color:var(--white); text-decoration:none;">→ LinkedIn</a>
+        <a href="https://bsky.app/profile/laiqai.bsky.social" target="_blank" style="color:var(--white); text-decoration:none;">→ Bluesky</a>
+      </div>
+    </div>
+  </div>
+</section>
+
 <section class="cs-section">
   <div class="section-head">
     <div class="eyebrow"><span class="dot"></span>Case Studies</div>
@@ -235,7 +262,15 @@
 
 <footer>
   Compiled from public reporting on Pakistan's AI and advertising sector, current as of mid-2026. Company details are self-reported by each firm; verify current capability, pricing, and availability directly before commissioning work. This directory is an independent editorial resource and is not affiliated with any listed company.<br><br>
-  A <a href="https://laiqverse11.wordpress.com" target="_blank">LaiqVerse</a> project.
+  A <a href="https://laiqverse11.wordpress.com" target="_blank">LaiqVerse</a> project, curated by Laiq Ahmed Qureshi.
+  <div style="margin-top:14px; display:flex; flex-wrap:wrap; gap:16px;">
+    <a href="https://laiqverse11.wordpress.com" target="_blank">Blog</a>
+    <a href="https://x.com/LaiqVerse" target="_blank">X</a>
+    <a href="https://www.instagram.com/laiqverse/?hl=en" target="_blank">Instagram</a>
+    <a href="https://www.facebook.com/LaiqVerse11" target="_blank">Facebook</a>
+    <a href="https://www.linkedin.com/in/laiqqureshi/" target="_blank">LinkedIn</a>
+    <a href="https://bsky.app/profile/laiqai.bsky.social" target="_blank">Bluesky</a>
+  </div>
 </footer>
 
 <div class="overlay" id="overlay">
@@ -349,7 +384,7 @@ function openModal(c){
   document.getElementById('modalBody').innerHTML = `
     <button class="close" id="closeBtn">&times;</button>
     <h3>${c.name}</h3>
-    <span class="loc" style="color:#C9A84C;">${c.city}</span>
+    <span class="loc" style="color:#E84A00;">${c.city}</span>
     <p>${c.desc}</p>
     <div class="tags">
       <span class="tag svc">${c.cat}</span>
