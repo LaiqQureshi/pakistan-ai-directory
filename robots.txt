@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://laiqqureshi.github.io/pakistan-ai-directory/sitemap.xml
